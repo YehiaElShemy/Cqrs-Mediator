@@ -7,17 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AutoMapper\" />
     <Folder Include="Features\Product\Commands\CreateProduct\" />
     <Folder Include="Features\Product\Commands\UpdateProduct\" />
     <Folder Include="Features\Product\Commands\DeleteProduct\" />
     <Folder Include="Features\Product\Queries\GetProductDetail\" />
-    <Folder Include="Features\Product\Queries\GetProductById\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="AutoMapper.Collection.EntityFrameworkCore" Version="10.0.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 

@@ -1,6 +1,7 @@
-﻿using Cqrs_Mediator.Application.Contract.ProductContract;
+﻿using Cqrs_Mediator.Application.Contract;
+using Cqrs_Mediator.Application.Contract.ProductContract;
 using Cqrs_Mediator.InfraStructure.DataContext;
-using DomainLayer.Contract;
+
 
 namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
 {

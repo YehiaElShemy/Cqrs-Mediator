@@ -1,6 +1,6 @@
 ﻿using Cqrs_Mediator.Application.Contract.ProductContract;
 
-namespace DomainLayer.Contract
+namespace Cqrs_Mediator.Application.Contract
 {
     public interface IAsyncUnitOfWork:IDisposable
     {

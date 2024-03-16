@@ -1,6 +1,5 @@
-using Cqrs_Mediator.InfraStructure.DataContext;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Cqrs_Mediator.Application.ApplicatioConfigrations;
+using Cqrs_Mediator.InfraStructure.InfraStructureConfigrations;
 
 namespace Cqrs_Mediator.Api
 {
@@ -11,10 +10,10 @@ namespace Cqrs_Mediator.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDbContext<ApplicationContext>(options => 
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddApplicationConfigration();
+            builder.Services.AddInfraStructureConfigrations(builder.Configuration);
+
             builder.Services.AddControllers();
-            builder.Services.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
