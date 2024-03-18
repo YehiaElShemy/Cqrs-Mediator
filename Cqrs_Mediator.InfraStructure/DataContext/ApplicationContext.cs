@@ -8,7 +8,7 @@ namespace Cqrs_Mediator.InfraStructure.DataContext
         {
             
         }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Products> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
 
     }

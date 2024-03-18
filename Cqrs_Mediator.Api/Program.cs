@@ -27,12 +27,13 @@ namespace Cqrs_Mediator.Api
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection(); //convert any request http to https 
 
             app.UseAuthorization();
 
 
-            app.MapControllers();
+            app.MapControllers();//reound on cottrollers and take apis and make mapping on owner api then make route table
+                                 //
 
             app.Run();
         }

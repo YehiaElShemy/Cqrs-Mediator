@@ -1,4 +1,7 @@
-﻿using Cqrs_Mediator.Application.Features.Product.Queries.GetAllProduct;
+﻿using Cqrs_Mediator.Application.Features.Product.Commands.CreateProduct;
+using Cqrs_Mediator.Application.Features.Product.Commands.DeleteProduct;
+using Cqrs_Mediator.Application.Features.Product.Commands.UpdateProduct;
+using Cqrs_Mediator.Application.Features.Product.Queries.GetAllProduct;
 using Cqrs_Mediator.Application.Features.Product.Queries.GetProductById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -21,10 +24,34 @@ namespace Cqrs_Mediator.Api.Controllers
         {
             return Ok(await _mediator.Send(new GetProductQueries()));
         }
-        [HttpGet()]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
             return Ok(await _mediator.Send(new GetProductByIdQuery() { Id=id}));
+        }
+        [HttpPost("CreateProduct")]
+        public async Task<IActionResult> CreateProduct(AddProductCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            return Ok(await _mediator.Send(command));
+        }
+        [HttpPost("UpdateProduct")]
+        public async Task<IActionResult> UpdateProduct(UpdateProductCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(await _mediator.Send(command));
+        }
+        [HttpPost("DeleteProduct")]
+        public async Task<IActionResult> DeleteProduct(DeleteProductCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(await _mediator.Send(command));
         }
     }
 }
