@@ -22,12 +22,12 @@ namespace Cqrs_Mediator.Api.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetProduct()
         {
-            return Ok(await _mediator.Send(new GetProductQueries()));
+            return Ok(await _mediator.Send(new GetProductQueries(1,2)));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            return Ok(await _mediator.Send(new GetProductByIdQuery() { Id=id}));
+            return Ok(await _mediator.Send(new GetProductByIdQuery() { id=id}));
         }
         [HttpPost("CreateProduct")]
         public async Task<IActionResult> CreateProduct(AddProductCommand command)

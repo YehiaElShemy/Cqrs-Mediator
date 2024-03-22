@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Cqrs_Mediator.Application.Contract;
+using Cqrs_Mediator.Application.Abstractions;
 using Cqrs_Mediator_Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -25,7 +25,7 @@ namespace Cqrs_Mediator.Application.Features.Product.Commands.UpdateProduct
             {
                 var productToUpdate = _mapper.Map<Products>(request);
                 var updatedProduct = await _unitOfWork._product.UpdateAsync(productToUpdate);
-                var result = await _unitOfWork.SaveChangeAsync();
+                var result = await _unitOfWork.SaveChangeAsync(cancellationToken);
 
                 if (result > 0)
                 {

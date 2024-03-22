@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Cqrs_Mediator.Application.Contract;
+using Cqrs_Mediator.Application.Abstractions;
 using Cqrs_Mediator_Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -29,7 +29,7 @@ namespace Cqrs_Mediator.Application.Features.Product.Commands.DeleteProduct
             {
                 var result = _mapper.Map<Products>(request);
                 var productDelete = await _unitOfWork._product.DeleteAsync(result);
-                var res = await _unitOfWork.SaveChangeAsync();
+                var res = await _unitOfWork.SaveChangeAsync(cancellationToken);
                 if (res > 0)
                 {
                     return productDelete;

@@ -1,6 +1,8 @@
-﻿using Cqrs_Mediator.Application.Contract;
-using Cqrs_Mediator.Application.Contract.ProductContract;
+﻿using Cqrs_Mediator.Application.Abstractions;
+using Cqrs_Mediator.Application.Abstractions.ProductContract;
 using Cqrs_Mediator.InfraStructure.DataContext;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
 
 
 namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
@@ -21,9 +23,15 @@ namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
         {
             db.Dispose();
         }
-        public async Task<int> SaveChangeAsync()
+        public async Task<int> SaveChangeAsync(CancellationToken cancellationToken)
         {
-            return await db.SaveChangesAsync();
+            return await db.SaveChangesAsync(cancellationToken);
+        }
+
+        public IDbTransaction BeginTransaction()
+        {
+            var transaction=db.Database.BeginTransaction();
+            return transaction.GetDbTransaction();
         }
     }
 }

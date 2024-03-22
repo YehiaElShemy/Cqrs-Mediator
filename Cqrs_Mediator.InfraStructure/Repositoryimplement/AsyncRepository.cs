@@ -1,13 +1,21 @@
-﻿using Cqrs_Mediator.Application.Contract;
+﻿using Cqrs_Mediator.Application.Abstractions;
+using Cqrs_Mediator.Application.Abstractions.RepositoryContract;
 using Cqrs_Mediator.InfraStructure.DataContext;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.Data;
 using System.Linq.Expressions;
+using static Dapper.SqlMapper;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
 {
     public class AsyncRepository<T> : IAsyncRepository<T> where T : class
     {
         protected readonly ApplicationContext db;
+
+
         private readonly DbSet<T> dbSet;
 
         public AsyncRepository(ApplicationContext _db)
@@ -16,6 +24,8 @@ namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
             dbSet = db.Set<T>();
         }
 
+
+ 
         public async Task<T> CreateAsync(T entity) =>
                (await dbSet.AddAsync(entity)).Entity;
 
@@ -41,8 +51,6 @@ namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression) =>
             await dbSet.Where(expression).ToListAsync();
 
-
-
         public async Task<IEnumerable<T>> GetAllAsync() =>
              await dbSet.ToListAsync();
 
@@ -56,6 +64,8 @@ namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
 
         public async Task<T> UpdateAsync(T entity) =>
             await Task.FromResult(dbSet.Update(entity).Entity);
+
+     
         /*        dbSet.Attach(entity);
 db.Entry(entity).State = EntityState.Modified;
 return entity;*/

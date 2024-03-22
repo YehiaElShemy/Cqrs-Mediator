@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Cqrs_Mediator.Application.Contract;
+using Cqrs_Mediator.Application.Abstractions;
 using MediatR;
 namespace Cqrs_Mediator.Application.Features.Product.Queries.GetAllProduct
 {
@@ -15,7 +15,7 @@ namespace Cqrs_Mediator.Application.Features.Product.Queries.GetAllProduct
         }
         public async Task<IEnumerable<GetAllProductListDto>> Handle(GetProductQueries request, CancellationToken cancellationToken)
         {
-            var result = _unitOfWork._product.GetAllIncludes();
+            var result = _unitOfWork._product.GetAllProductPagaintion(request.page,request.pageSize);
             return _mapper.Map<IEnumerable<GetAllProductListDto>>(result);
            
 

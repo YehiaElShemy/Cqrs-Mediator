@@ -1,6 +1,7 @@
-﻿using Cqrs_Mediator.Application.Contract.ProductContract;
+﻿using Cqrs_Mediator.Application.Abstractions.ProductContract;
 using Cqrs_Mediator.InfraStructure.DataContext;
 using Cqrs_Mediator_Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
 {
@@ -10,9 +11,13 @@ namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
         {
         }
 
-        Task<IEnumerable<Products>> IRepositoryProduct.GetPopularProjects(int count)
+        public async Task<IEnumerable<Products>> GetAllProductPagaintion(int page,int pageSize)
         {
-            throw new NotImplementedException();
+            return await db.Set<Products>()
+                .OrderBy(a=>a.Id)
+                .Skip((page-1)*pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
     }
 }

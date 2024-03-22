@@ -10,6 +10,6 @@ namespace Cqrs_Mediator.Application.Features.Product.Queries.GetProductById
 {
     public class GetProductByIdQuery : IRequest<GetProductByIdDto>
     {
-        public int Id { get; set; }
+        public int id { get; set; }
     }
 }

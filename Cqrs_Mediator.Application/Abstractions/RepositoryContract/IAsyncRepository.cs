@@ -1,6 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿using System.Data;
+using System.Linq.Expressions;
 
-namespace Cqrs_Mediator.Application.Contract
+namespace Cqrs_Mediator.Application.Abstractions
 {
     public interface IAsyncRepository<T> where T : class
     {
