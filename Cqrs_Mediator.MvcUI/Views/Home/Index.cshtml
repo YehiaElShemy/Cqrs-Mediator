@@ -1,0 +1,13 @@
+﻿@model List<productsVm>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (var item in Model)
+{
+
+    <div class="text-center">
+        <h1 class="display-4">@item.name</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core"></a>@item.description</p>
+    </div>
+}

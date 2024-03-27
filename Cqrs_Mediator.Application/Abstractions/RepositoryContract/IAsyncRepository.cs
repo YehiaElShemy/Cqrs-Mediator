@@ -7,7 +7,7 @@ namespace Cqrs_Mediator.Application.Abstractions
     {
         Task<T> CreateAsync(T entity);
         Task<T> UpdateAsync(T entity);
-        Task<bool> DeleteAsync(T entity);
+        Task<T> DeleteAsync(T entity);
         Task<T> GetByIdAsync(object id);
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> GetAllIncludes(params Expression<Func<T, Object>>[] includes);

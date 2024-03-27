@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Cqrs_Mediator.Application.Features.Product.Commands.DeleteProduct
 {
-    public class DeleteProductHandler : IRequestHandler<DeleteProductCommand, bool>
+    public class DeleteProductHandler : IRequestHandler<DeleteProductCommand, ProductDto>
     {
         private readonly IAsyncUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -23,22 +23,23 @@ namespace Cqrs_Mediator.Application.Features.Product.Commands.DeleteProduct
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task<bool> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var result = _mapper.Map<Products>(request);
-                var productDelete = await _unitOfWork._product.DeleteAsync(result);
+                var productToDelete = _mapper.Map<Products>(request);
+                var DeleteProduct = await _unitOfWork._product.DeleteAsync(productToDelete);
                 var res = await _unitOfWork.SaveChangeAsync(cancellationToken);
                 if (res > 0)
                 {
-                    return productDelete;
+                    return _mapper.Map<ProductDto>(DeleteProduct);
+
                 }
                 {
                     // Handle the case where no changes were made or persisted
                     // For example:
                     _logger.LogWarning("No changes were made during the update operation.");
-                    return false; // Or throw an exception, depending on your requirements
+                    return null; // Or throw an exception, depending on your requirements
                 }
             }
             catch (Exception ex)

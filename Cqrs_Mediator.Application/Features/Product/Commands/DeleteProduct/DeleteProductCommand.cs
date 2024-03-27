@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cqrs_Mediator.Application.Features.Product.Commands.DeleteProduct
 {
-    public class DeleteProductCommand : IRequest<bool>
+    public class DeleteProductCommand : IRequest<ProductDto>
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -34,10 +34,10 @@ namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
         {
             dbSet.AddRangeAsync(entities);
         }
-        public async Task<bool> DeleteAsync(T entity)
+        public async Task<T> DeleteAsync(T entity)
         {
-            var result = await Task.FromResult(dbSet.Remove(entity));
-            return result is not null ? true : false;
+            var result = await Task.FromResult(dbSet.Remove(entity).Entity);
+            return result;
         }
         public IEnumerable<T> GetAllIncludes(params Expression<Func<T, Object>>[] includes)
         {

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Cqrs_Mediator.Application.Features.Product.Commands.CreateProduct
 {
-    internal class AddProductHandler : IRequestHandler<AddProductCommand, AddProductDto>
+    internal class AddProductHandler : IRequestHandler<AddProductCommand, ProductDto>
     {
         private readonly IAsyncUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace Cqrs_Mediator.Application.Features.Product.Commands.CreateProduct
             _logger = logger;
           
         }
-        public async Task<AddProductDto> Handle(AddProductCommand request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
             using var transaction=_unitOfWork.BeginTransaction();
             try
@@ -33,7 +33,7 @@ namespace Cqrs_Mediator.Application.Features.Product.Commands.CreateProduct
                 if (result > 0)
                 {
                     transaction.Commit();
-                    AddProductDto productDto = _mapper.Map<AddProductDto>(createProduct);
+                    ProductDto productDto = _mapper.Map<ProductDto>(createProduct);
                     return productDto;
                 }
                 else

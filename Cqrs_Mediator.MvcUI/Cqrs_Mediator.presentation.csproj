@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cqrs_Mediator.Application\Cqrs_Mediator.Application.csproj" />
+    <ProjectReference Include="..\Cqrs_Mediator.InfraStructure\Cqrs_Mediator.InfraStructure.csproj" />
+  </ItemGroup>
+
+</Project>

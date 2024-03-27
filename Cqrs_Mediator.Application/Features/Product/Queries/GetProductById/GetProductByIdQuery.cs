@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cqrs_Mediator.Application.Features.Product.Queries.GetProductById
 {
-    public class GetProductByIdQuery : IRequest<GetProductByIdDto>
+    public class GetProductByIdQuery : IRequest<ProductDto>
     {
         public int id { get; set; }
     }

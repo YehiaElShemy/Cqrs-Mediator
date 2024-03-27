@@ -5,7 +5,7 @@ using Cqrs_Mediator_Domain.Entities;
 using MediatR;
 namespace Cqrs_Mediator.Application.Features.Product.Queries.GetProductById
 {
-    public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, GetProductByIdDto>
+    public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, ProductDto>
     {
         private readonly IDbConnectionFactory<Products> _factory;
         private readonly IMapper _mapper;
@@ -15,7 +15,7 @@ namespace Cqrs_Mediator.Application.Features.Product.Queries.GetProductById
             _factory = factory;
             _mapper = mapper;
         }
-        public async Task<GetProductByIdDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
            /* var result = _unitOfWork._product.GetByIdAsync(request.Id);
             return _mapper.Map<GetProductByIdDto>(result);
@@ -23,10 +23,10 @@ namespace Cqrs_Mediator.Application.Features.Product.Queries.GetProductById
            var result= await _factory.QueryFirstOrDefaultAsync("getproductbyid", request,null,cancellationToken);
             if (result == null)
             {
-                return new GetProductByIdDto();
+                return new ProductDto();
             }
            /* var product = result.FirstOrDefault();*/
-            return _mapper.Map<GetProductByIdDto>(result);
+            return _mapper.Map<ProductDto>(result);
         }
     }
 }

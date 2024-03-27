@@ -20,11 +20,8 @@ namespace Cqrs_Mediator.InfraStructure.Repositoryimplement
         private async Task<IDbConnection> openConnection()
         {
             var connection = _db.Database.GetDbConnection();
-         
-                if (connection.State != ConnectionState.Open)
-                    await connection.OpenAsync();
-
-          
+            if (connection.State != ConnectionState.Open)
+                await connection.OpenAsync();
             return connection;
         }
         public async Task<IEnumerable<T>> QueryAsync(string sql, object parameters = null)

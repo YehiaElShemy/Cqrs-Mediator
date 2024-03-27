@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Cqrs_Mediator.Application.Features.Product.Commands.UpdateProduct
 {
-    public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, UpdateProductDto>
+    public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, ProductDto>
     {
         private readonly IAsyncUnitOfWork _unitOfWork;
 
@@ -19,7 +19,7 @@ namespace Cqrs_Mediator.Application.Features.Product.Commands.UpdateProduct
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task<UpdateProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace Cqrs_Mediator.Application.Features.Product.Commands.UpdateProduct
 
                 if (result > 0)
                 {
-                    var productDto = _mapper.Map<UpdateProductDto>(updatedProduct);
+                    var productDto = _mapper.Map<ProductDto>(updatedProduct);
                     return productDto;
                 }
                 else
