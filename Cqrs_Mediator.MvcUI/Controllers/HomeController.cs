@@ -36,7 +36,7 @@ namespace Cqrs_Mediator.presentation.Controllers
             }
             else
             {
-                var res = await _httpClientService.GetRequestById<productsVm>("/api/Product/GetProductById",id);
+                var res = await _httpClientService.GetRequestById<productsVm>("/api/Product/GetProductById",id.ToString());
                 return View(res);
             }
         }

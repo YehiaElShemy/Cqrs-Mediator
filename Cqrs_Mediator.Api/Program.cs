@@ -1,5 +1,6 @@
 using Cqrs_Mediator.Application.ApplicatioConfigrations;
 using Cqrs_Mediator.InfraStructure.InfraStructureConfigrations;
+using Cqrs_Mediator.InfraStructure.InfraStructureConfigrations.SettingSystem;
 
 namespace Cqrs_Mediator.Api
 {
@@ -8,7 +9,11 @@ namespace Cqrs_Mediator.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+        /*     var sdsj= builder.Configuration.GetSection("Attechments").Get<FileConfig>();//get:create object
+            FileConfig fileConfig=new FileConfig();
+            builder.Configuration.GetSection("Attechments").Bind(fileConfig); //must create object*/
+           builder.Services.Configure<FileConfig>(builder.Configuration.GetSection("Attechments")); //enable to inject Ioption  and this
+                                                                                                    //best I Option Create object singleton
             // Add services to the container.
             builder.Services.AddApplicationConfigration();
             builder.Services.AddInfraStructureConfigrations(builder.Configuration);
@@ -33,7 +38,7 @@ namespace Cqrs_Mediator.Api
 
 
             app.MapControllers();//reound on cottrollers and take apis and make mapping on owner api then make route table
-                                 //
+                                 
 
             app.Run();
         }

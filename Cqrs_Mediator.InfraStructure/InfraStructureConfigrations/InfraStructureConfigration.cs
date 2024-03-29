@@ -2,6 +2,7 @@
 using Cqrs_Mediator.Application.Abstractions.ProductContract;
 using Cqrs_Mediator.Application.Abstractions.RepositoryContract;
 using Cqrs_Mediator.InfraStructure.DataContext;
+using Cqrs_Mediator.InfraStructure.InfraStructureConfigrations.SettingSystem;
 using Cqrs_Mediator.InfraStructure.Repositoryimplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ namespace Cqrs_Mediator.InfraStructure.InfraStructureConfigrations
     {
         public static IServiceCollection AddInfraStructureConfigrations(this IServiceCollection services, IConfiguration configuration)
         {
+           
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection")));

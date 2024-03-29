@@ -11,7 +11,7 @@ namespace Cqrs_Mediator.presentation
         {
             var builder = WebApplication.CreateBuilder(args);
           
-            builder.Services.AddHttpClient<IHttpClientServeices, HttpClientServeices>();
+            builder.Services.AddScoped<IHttpClientServeices, HttpClientServeices>();
             builder.Services.AddHttpClient("MyHttpClient", client =>
             {
                 // Configure the HttpClient here if needed
