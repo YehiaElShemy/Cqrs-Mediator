@@ -16,6 +16,7 @@ namespace Cqrs_Mediator.InfraStructure.HttpClientRepositry
     public class HttpClientServeices : IHttpClientServeices
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHttpClientFactory _httpClientFactory2;
         public HttpClientServeices(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
